@@ -4,11 +4,11 @@ algods is compose of algo(algorithm) and gods(go data structure).
 
 ## algorithm
 
-- cg: Computer Graphics.
-  - fdct_2d: 2d Forward Discrete Cosine Transform.
-  - fdct_2d_new: 2d Forward Discrete Cosine Transform (mat made by 1d slice instead of 2d slice).
+- **cg**: Computer Graphics.
+  - **FDCT2D**: 2d Forward Discrete Cosine Transform.
+  - **IDCT2D**: 2d Inverse Discrete Cosine Transform.
 
 ## math
 
-- matrix: matrix operation.
-  - matrix_2d: 2d matrix operation.
+- **matrix**: matrix operation.
+  - **Mat2D**: 2d matrix operation (use 1d slice).
