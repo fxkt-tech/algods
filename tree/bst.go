@@ -1,9 +1,5 @@
 package tree
 
-import (
-	"fxkt.tech/algods/node"
-)
-
 type BinarySearchTree struct {
 	LastResult []int // last result. you need call Clear() before call Order.
 }
@@ -16,7 +12,7 @@ func (bst *BinarySearchTree) Clear() {
 	bst.LastResult = make([]int, 0)
 }
 
-func (bst *BinarySearchTree) PreOrder(root *node.Tree) {
+func (bst *BinarySearchTree) PreOrder(root *Node) {
 	if root == nil {
 		return
 	}
@@ -24,21 +20,21 @@ func (bst *BinarySearchTree) PreOrder(root *node.Tree) {
 	return
 }
 
-func (bst *BinarySearchTree) InOrder(root *node.Tree) {
+func (bst *BinarySearchTree) InOrder(root *Node) {
 	if root == nil {
 		return
 	}
 	return
 }
 
-func (bst *BinarySearchTree) PostOrder(root *node.Tree) {
+func (bst *BinarySearchTree) PostOrder(root *Node) {
 	if root == nil {
 		return
 	}
 	return
 }
 
-func (bst *BinarySearchTree) PreOrderByRecursion(root *node.Tree) {
+func (bst *BinarySearchTree) PreOrderByRecursion(root *Node) {
 	if root == nil {
 		return
 	}
@@ -48,7 +44,7 @@ func (bst *BinarySearchTree) PreOrderByRecursion(root *node.Tree) {
 	return
 }
 
-func (bst *BinarySearchTree) InOrderByRecursion(root *node.Tree) {
+func (bst *BinarySearchTree) InOrderByRecursion(root *Node) {
 	if root == nil {
 		return
 	}
@@ -58,7 +54,7 @@ func (bst *BinarySearchTree) InOrderByRecursion(root *node.Tree) {
 	return
 }
 
-func (bst *BinarySearchTree) PostOrderByRecursion(root *node.Tree) {
+func (bst *BinarySearchTree) PostOrderByRecursion(root *Node) {
 	if root == nil {
 		return
 	}

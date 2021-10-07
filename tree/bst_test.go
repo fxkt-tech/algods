@@ -2,23 +2,21 @@ package tree
 
 import (
 	"testing"
-
-	"fxkt.tech/algods/node"
 )
 
 func TestBST(t *testing.T) {
 	bst := NewBinarySearchTree()
-	node := &node.Tree{
+	node := &Node{
 		Val: 4,
-		Left: &node.Tree{
+		Left: &Node{
 			Val:   2,
-			Left:  &node.Tree{Val: 1},
-			Right: &node.Tree{Val: 3},
+			Left:  &Node{Val: 1},
+			Right: &Node{Val: 3},
 		},
-		Right: &node.Tree{
+		Right: &Node{
 			Val:   6,
-			Left:  &node.Tree{Val: 5},
-			Right: &node.Tree{Val: 7},
+			Left:  &Node{Val: 5},
+			Right: &Node{Val: 7},
 		},
 	}
 	bst.PreOrderByRecursion(node)
