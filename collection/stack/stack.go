@@ -1,26 +1,26 @@
 package stack
 
-type ArrayStack struct {
-	arr []interface{} // abstract stack.
+type ArrayStack[T any] struct {
+	arr []T // abstract stack.
 }
 
-func NewArrayStack() *ArrayStack {
-	return &ArrayStack{}
+func NewArrayStack[T any]() *ArrayStack[T] {
+	return &ArrayStack[T]{}
 }
 
-func (s *ArrayStack) Push(val interface{}) {
+func (s *ArrayStack[T]) Push(val T) {
 	s.arr = append(s.arr, val)
 }
 
-func (s *ArrayStack) Pop() (interface{}, bool) {
+func (s *ArrayStack[T]) Pop() (t T, b bool) {
 	if len(s.arr) == 0 {
-		return 0, false
+		return
 	}
 	elem := s.arr[len(s.arr)-1]
 	s.arr = s.arr[:len(s.arr)-1]
 	return elem, true
 }
 
-func (s *ArrayStack) IsEmpty() bool {
+func (s *ArrayStack[T]) IsEmpty() bool {
 	return len(s.arr) == 0
 }

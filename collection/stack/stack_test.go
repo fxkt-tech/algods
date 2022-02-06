@@ -3,7 +3,7 @@ package stack
 import "testing"
 
 func TestArrayStack(t *testing.T) {
-	s := NewArrayStack()
+	s := NewArrayStack[int]()
 	for i := 0; i < 100; i++ {
 		s.Push(i)
 	}

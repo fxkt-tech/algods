@@ -1,30 +1,30 @@
 package queue
 
-type ArrayQueue struct {
-	arr []interface{} // abstract stack.
+type ArrayQueue[T any] struct {
+	arr []T // abstract stack.
 }
 
-func NewArrayQueue() *ArrayQueue {
-	return &ArrayQueue{}
+func NewArrayQueue[T any]() *ArrayQueue[T] {
+	return &ArrayQueue[T]{}
 }
 
-func (q *ArrayQueue) Push(val interface{}) {
+func (q *ArrayQueue[T]) Push(val T) {
 	q.arr = append(q.arr, val)
 }
 
-func (q *ArrayQueue) Pop() (interface{}, bool) {
+func (q *ArrayQueue[T]) Pop() (t T, b bool) {
 	if len(q.arr) == 0 {
-		return 0, false
+		return
 	}
 	elem := q.arr[0]
 	q.arr = q.arr[1:]
 	return elem, true
 }
 
-func (q *ArrayQueue) Size() int {
+func (q *ArrayQueue[T]) Size() int {
 	return len(q.arr)
 }
 
-func (q *ArrayQueue) IsEmpty() bool {
+func (q *ArrayQueue[T]) IsEmpty() bool {
 	return len(q.arr) == 0
 }

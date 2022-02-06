@@ -1,6 +1,6 @@
-# algods
+# ringo
 
-algods is compose of algo(algorithm) and gods(go data structure).
+ringo is compose of algo(algorithm) and gods(go data structure).
 
 ## algorithm
 
@@ -16,3 +16,7 @@ algods is compose of algo(algorithm) and gods(go data structure).
 
 - **matrix**: matrix operation.
   - **Mat2D**: 2d matrix operation (use 1d slice).
+- **dim**: math calc.
+  - **Max**: compare the maximum value of a and b.
+  - **Min**: compare the minimum value of a and b.
+  - **Abs**: calculate the absolute value of a.

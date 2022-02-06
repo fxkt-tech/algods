@@ -1,3 +1,3 @@
-module fxkt.tech/algods
+module fxkt.tech/ringo
 
-go 1.16
+go 1.18

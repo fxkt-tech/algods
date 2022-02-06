@@ -1,18 +1,18 @@
 package tree
 
 import (
+	"constraints"
 	"fmt"
-	"strconv"
 	"strings"
 
-	"fxkt.tech/algods/collection/queue"
-	"fxkt.tech/algods/collection/stack"
-	"fxkt.tech/algods/collection/vector"
-	"fxkt.tech/algods/pkg/json"
+	"fxkt.tech/ringo/collection/list"
+	"fxkt.tech/ringo/collection/queue"
+	"fxkt.tech/ringo/collection/stack"
 )
 
-func PreOrder(root *Node) (l []int) {
-	s := stack.NewArrayStack()
+// 先序遍历
+func PreOrder[T constraints.Ordered](root *Node[T]) (l []T) {
+	s := stack.NewArrayStack[*Node[T]]()
 	p := root
 	for p != nil || !s.IsEmpty() {
 		if p != nil {
@@ -21,14 +21,15 @@ func PreOrder(root *Node) (l []int) {
 			p = p.Left
 		} else {
 			n, _ := s.Pop()
-			p = n.(*Node).Right
+			p = n.Right
 		}
 	}
 	return
 }
 
-func InOrder(root *Node) (l []int) {
-	s := stack.NewArrayStack()
+// 中序遍历
+func InOrder[T constraints.Ordered](root *Node[T]) (l []T) {
+	s := stack.NewArrayStack[*Node[T]]()
 	p := root
 	for p != nil || !s.IsEmpty() {
 		if p != nil {
@@ -36,15 +37,16 @@ func InOrder(root *Node) (l []int) {
 			p = p.Left
 		} else {
 			n, _ := s.Pop()
-			l = append(l, n.(*Node).Val)
-			p = n.(*Node).Right
+			l = append(l, n.Val)
+			p = n.Right
 		}
 	}
 	return
 }
 
-func PostOrder(root *Node) (l []int) {
-	s := stack.NewArrayStack()
+// 后序遍历
+func PostOrder[T constraints.Ordered](root *Node[T]) (l []T) {
+	s := stack.NewArrayStack[*Node[T]]()
 	p := root
 	for p != nil || !s.IsEmpty() {
 		if p != nil {
@@ -53,21 +55,22 @@ func PostOrder(root *Node) (l []int) {
 			p = p.Right
 		} else {
 			n, _ := s.Pop()
-			p = n.(*Node).Left
+			p = n.Left
 		}
 	}
-	vector.Reverse(l)
+	list.ReverseArray(l)
 	return
 }
 
-func LevelOrder(root *Node) (l [][]int) {
-	q := queue.NewArrayQueue()
+// 层序遍历
+func LevelOrder[T constraints.Ordered](root *Node[T]) (l [][]T) {
+	q := queue.NewArrayQueue[*Node[T]]()
 	q.Push(root)
 	for sz := q.Size(); sz > 0; sz = q.Size() {
-		var x []int
+		var x []T
 		for i := 0; i < sz; i++ {
 			elem, _ := q.Pop()
-			qn := elem.(*Node)
+			qn := elem
 			x = append(x, qn.Val)
 			if qn.Left != nil {
 				q.Push(qn.Left)
@@ -81,27 +84,23 @@ func LevelOrder(root *Node) (l [][]int) {
 	return
 }
 
-func Marshal(root *Node) string {
+func Marshal[T constraints.Ordered](root *Node[T]) string {
 	if root == nil {
 		return "[]"
 	}
 	var x []string
-	var q []*Node
-	q = append(q, root)
-	for sz := len(q); sz > 0; sz = len(q) {
+	q := queue.NewArrayQueue[*Node[T]]()
+	q.Push(root)
+	for sz := q.Size(); sz > 0; sz = q.Size() {
 		for i := 0; i < sz; i++ {
-			fmt.Println("q:", json.ToString(q))
-			qn := q[0]
-			q = q[1:]
-			fmt.Println("q2:", json.ToString(q))
+			qn, _ := q.Pop()
 			if qn != nil {
-				x = append(x, strconv.Itoa(qn.Val))
-				q = append(q, qn.Left)
-				q = append(q, qn.Right)
+				x = append(x, fmt.Sprintf("%v", qn.Val))
+				q.Push(qn.Left)
+				q.Push(qn.Right)
 			} else {
 				x = append(x, "null")
 			}
-			fmt.Println("q3:", json.ToString(q))
 		}
 	}
 	return fmt.Sprintf("[%s]", strings.Join(x, ","))

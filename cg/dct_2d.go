@@ -3,7 +3,7 @@ package cg
 import (
 	sysmath "math"
 
-	"fxkt.tech/algods/math"
+	"fxkt.tech/ringo/math"
 )
 
 // Forward Discrete Cosine Transform for 2d matrix.

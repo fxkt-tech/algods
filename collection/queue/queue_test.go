@@ -3,7 +3,7 @@ package queue
 import "testing"
 
 func TestArrayQueue(t *testing.T) {
-	s := NewArrayQueue()
+	s := NewArrayQueue[int]()
 	for i := 0; i < 100; i++ {
 		s.Push(i)
 	}

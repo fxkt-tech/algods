@@ -1,7 +1,10 @@
 package tree
 
-// Node is node for binary tree.
-type Node struct {
-	Val         int
-	Left, Right *Node
+import (
+	"constraints"
+)
+
+type Node[T constraints.Ordered] struct {
+	Val         T
+	Left, Right *Node[T]
 }

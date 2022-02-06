@@ -5,17 +5,17 @@ import (
 )
 
 func TestBST(t *testing.T) {
-	te := &Node{
+	te := &Node[int]{
 		Val: 4,
-		Left: &Node{
+		Left: &Node[int]{
 			Val:   2,
-			Left:  &Node{Val: 1},
-			Right: &Node{Val: 3},
+			Left:  &Node[int]{Val: 1},
+			Right: &Node[int]{Val: 3},
 		},
-		Right: &Node{
+		Right: &Node[int]{
 			Val:   6,
-			Left:  &Node{Val: 5},
-			Right: &Node{Val: 7},
+			Left:  &Node[int]{Val: 5},
+			Right: &Node[int]{Val: 7},
 		},
 	}
 

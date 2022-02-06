@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"fxkt.tech/algods/math"
+	"fxkt.tech/ringo/math"
 )
 
 var (
