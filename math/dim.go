@@ -1,6 +1,6 @@
 package math
 
-import "constraints"
+import "golang.org/x/exp/constraints"
 
 // 整型绝对值
 func Abs[T constraints.Integer | constraints.Float](x T) T {

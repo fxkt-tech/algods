@@ -1,22 +1,24 @@
 package tree
 
 import (
-	"constraints"
 	"fmt"
 	"strings"
 
-	"fxkt.tech/ringo/collection/list"
-	"fxkt.tech/ringo/collection/queue"
-	"fxkt.tech/ringo/collection/stack"
+	"golang.org/x/exp/constraints"
+
+	"fxkt.tech/ringo/container/list"
+	"fxkt.tech/ringo/container/queue"
+	"fxkt.tech/ringo/container/stack"
+	"fxkt.tech/ringo/node"
 )
 
 // 先序遍历
-func PreOrder[T constraints.Ordered](root *Node[T]) (l []T) {
-	s := stack.NewArrayStack[*Node[T]]()
+func PreOrder[T constraints.Ordered](root *node.Binary[T]) (l []T) {
+	s := stack.NewArrayStack[*node.Binary[T]]()
 	p := root
 	for p != nil || !s.IsEmpty() {
 		if p != nil {
-			l = append(l, p.Val)
+			l = append(l, p.Value)
 			s.Push(p)
 			p = p.Left
 		} else {
@@ -28,8 +30,8 @@ func PreOrder[T constraints.Ordered](root *Node[T]) (l []T) {
 }
 
 // 中序遍历
-func InOrder[T constraints.Ordered](root *Node[T]) (l []T) {
-	s := stack.NewArrayStack[*Node[T]]()
+func InOrder[T constraints.Ordered](root *node.Binary[T]) (l []T) {
+	s := stack.NewArrayStack[*node.Binary[T]]()
 	p := root
 	for p != nil || !s.IsEmpty() {
 		if p != nil {
@@ -37,7 +39,7 @@ func InOrder[T constraints.Ordered](root *Node[T]) (l []T) {
 			p = p.Left
 		} else {
 			n, _ := s.Pop()
-			l = append(l, n.Val)
+			l = append(l, n.Value)
 			p = n.Right
 		}
 	}
@@ -45,12 +47,12 @@ func InOrder[T constraints.Ordered](root *Node[T]) (l []T) {
 }
 
 // 后序遍历
-func PostOrder[T constraints.Ordered](root *Node[T]) (l []T) {
-	s := stack.NewArrayStack[*Node[T]]()
+func PostOrder[T constraints.Ordered](root *node.Binary[T]) (l []T) {
+	s := stack.NewArrayStack[*node.Binary[T]]()
 	p := root
 	for p != nil || !s.IsEmpty() {
 		if p != nil {
-			l = append(l, p.Val)
+			l = append(l, p.Value)
 			s.Push(p)
 			p = p.Right
 		} else {
@@ -63,15 +65,15 @@ func PostOrder[T constraints.Ordered](root *Node[T]) (l []T) {
 }
 
 // 层序遍历
-func LevelOrder[T constraints.Ordered](root *Node[T]) (l [][]T) {
-	q := queue.NewArrayQueue[*Node[T]]()
+func LevelOrder[T constraints.Ordered](root *node.Binary[T]) (l [][]T) {
+	q := queue.NewArrayQueue[*node.Binary[T]]()
 	q.Push(root)
 	for sz := q.Size(); sz > 0; sz = q.Size() {
 		var x []T
 		for i := 0; i < sz; i++ {
 			elem, _ := q.Pop()
 			qn := elem
-			x = append(x, qn.Val)
+			x = append(x, qn.Value)
 			if qn.Left != nil {
 				q.Push(qn.Left)
 			}
@@ -84,18 +86,18 @@ func LevelOrder[T constraints.Ordered](root *Node[T]) (l [][]T) {
 	return
 }
 
-func Marshal[T constraints.Ordered](root *Node[T]) string {
+func Marshal[T constraints.Ordered](root *node.Binary[T]) string {
 	if root == nil {
 		return "[]"
 	}
 	var x []string
-	q := queue.NewArrayQueue[*Node[T]]()
+	q := queue.NewArrayQueue[*node.Binary[T]]()
 	q.Push(root)
 	for sz := q.Size(); sz > 0; sz = q.Size() {
 		for i := 0; i < sz; i++ {
 			qn, _ := q.Pop()
 			if qn != nil {
-				x = append(x, fmt.Sprintf("%v", qn.Val))
+				x = append(x, fmt.Sprintf("%v", qn.Value))
 				q.Push(qn.Left)
 				q.Push(qn.Right)
 			} else {
